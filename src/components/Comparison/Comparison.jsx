@@ -12,6 +12,18 @@ function Comparison({ items, setItems }) {
     }
   };
 
+  const updateScore = (array, index, action) => {
+    action === 'increment'
+      ? (array[index] = {
+          ...array[index],
+          score: array[index].score + 1,
+        })
+      : (array[index] = {
+          ...array[index],
+          score: array[index].score - 1,
+        });
+  };
+
   const selectBest = (elem) => {
     const elemIndex = items.findIndex((item) => item.itemName === elem.id);
     const siblingIndex = elem.nextSibling
@@ -23,14 +35,9 @@ function Comparison({ items, setItems }) {
     if (elem.nextSibling && elem.nextSibling.classList.contains('active')) {
       elem.nextSibling.classList.remove('active');
       elem.classList.add('active');
-      newArray[elemIndex] = {
-        ...newArray[elemIndex],
-        score: newArray[elemIndex].score + 1,
-      };
-      newArray[siblingIndex] = {
-        ...newArray[siblingIndex],
-        score: newArray[siblingIndex].score - 1,
-      };
+
+      updateScore(newArray, elemIndex, 'increment');
+      updateScore(newArray, siblingIndex, 'decrement');
     } else if (
       elem.previousSibling &&
       elem.previousSibling.classList.contains('active')
@@ -38,20 +45,12 @@ function Comparison({ items, setItems }) {
       elem.previousSibling.classList.remove('active');
       elem.classList.add('active');
 
-      newArray[elemIndex] = {
-        ...newArray[elemIndex],
-        score: newArray[elemIndex].score + 1,
-      };
-      newArray[siblingIndex] = {
-        ...newArray[siblingIndex],
-        score: newArray[siblingIndex].score - 1,
-      };
-    } else {
+      updateScore(newArray, elemIndex, 'increment');
+      updateScore(newArray, siblingIndex, 'decrement');
+    } else if (!elem.classList.contains('active')) {
       elem.classList.add('active');
-      newArray[elemIndex] = {
-        ...newArray[elemIndex],
-        score: newArray[elemIndex].score + 1,
-      };
+
+      updateScore(newArray, elemIndex, 'increment');
     }
 
     setItems(newArray);

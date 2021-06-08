@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Comparison from '../Comparison/Comparison';
 
-function Entry() {
+function Entry({ items, setItems }) {
   const [itemName, setItemName] = useState('');
-  const [items, setItems] = useState([]);
   const [sorted, setSorted] = useState([]);
+  const [maxItem, setMaxItem] = useState(0);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,6 +31,7 @@ function Entry() {
 
   useEffect(() => {
     setSorted([...items].sort((a, b) => (a.score > b.score ? -1 : 1)));
+    setMaxItem(Math.max(...items.map((item) => item.score)));
   }, [items]);
 
   return (
@@ -42,6 +43,7 @@ function Entry() {
       >
         <input
           type='text'
+          placeholder='New item'
           value={itemName}
           onChange={(event) => handleChange(event)}
         />
@@ -61,14 +63,17 @@ function Entry() {
               <tr key={i}>
                 <td>{item.itemName}</td>
                 <td>{item.score}</td>
-                {item.score > 0 && i === 0 ? <td>Winner!</td> : <td></td>}
+                {item.score > 0 && item.score === maxItem ? (
+                  <td>Winner!</td>
+                ) : (
+                  <td></td>
+                )}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      <Comparison items={items} setItems={setItems} />
+      {/* <Comparison items={items} setItems={setItems} /> */}
     </div>
   );
 }
