@@ -8,7 +8,9 @@ function Entry() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!items.includes(itemName)) {
+    if (items.some((item) => item.itemName === itemName)) {
+      alert('Item already exists! Please enter a new item');
+    } else if (itemName) {
       setItems((prev) => [
         ...prev,
         {
@@ -17,8 +19,9 @@ function Entry() {
         },
       ]);
     } else {
-      alert('Item already exists! Please enter a new item');
+      alert('Item is empty! Please enter a full item');
     }
+
     setItemName('');
   };
 
