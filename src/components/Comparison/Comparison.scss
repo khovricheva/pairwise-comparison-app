@@ -1,0 +1,28 @@
+.comparison {
+  .comparison_header {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin: 0.5rem 0;
+  }
+
+  .pair {
+    .pair-btn {
+      margin: 0.4rem;
+      padding: 0.7rem 1rem;
+      background-color: #fff;
+      color: #c0c0c0;
+      border: 1px solid #d3d3d3;
+      border-radius: 5px;
+      font-size: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .active {
+      border: none;
+      background-color: #80e8d9;
+      color: #fff;
+    }
+  }
+}

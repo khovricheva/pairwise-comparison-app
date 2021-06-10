@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Comparison from '../Comparison/Comparison';
+import './Entry.scss';
 
 function Entry({ items, setItems }) {
   const [itemName, setItemName] = useState('');
@@ -35,8 +35,9 @@ function Entry({ items, setItems }) {
   }, [items]);
 
   return (
-    <div>
+    <div className='entry'>
       <form
+        className='user-input'
         onSubmit={(event) => {
           handleSubmit(event);
         }}
@@ -47,9 +48,11 @@ function Entry({ items, setItems }) {
           value={itemName}
           onChange={(event) => handleChange(event)}
         />
-        <input type='submit' value='Add' />
+        <button type='submit' className='add-btn'>
+          Add
+        </button>
       </form>
-      <div className='table'>
+      <div className='results'>
         <table>
           <tbody>
             {items.length > 0 && (
@@ -64,7 +67,9 @@ function Entry({ items, setItems }) {
                 <td>{item.itemName}</td>
                 <td>{item.score}</td>
                 {item.score > 0 && item.score === maxItem ? (
-                  <td>Winner!</td>
+                  <td>
+                    <span className='winner-tag'>Winner</span>
+                  </td>
                 ) : (
                   <td></td>
                 )}
@@ -73,7 +78,6 @@ function Entry({ items, setItems }) {
           </tbody>
         </table>
       </div>
-      {/* <Comparison items={items} setItems={setItems} /> */}
     </div>
   );
 }

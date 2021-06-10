@@ -1,0 +1,67 @@
+.entry {
+  .user-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+
+    input[type='text'] {
+      width: 75%;
+      outline: none;
+      padding: 0.54rem;
+      font-size: 1rem;
+      border: 1px solid #d3d3d3;
+      border-radius: 5px 0 0 5px;
+
+      &::placeholder {
+        color: #d3d3d3;
+      }
+    }
+    .add-btn {
+      width: 25%;
+      padding: 0.6rem;
+      background-color: #61d1b2;
+      color: #fff;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      font-size: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .results {
+    margin: 1rem 0;
+
+    table {
+      border-collapse: collapse;
+
+      tr:not(:last-child) {
+        border-bottom: 1px solid #ccc;
+      }
+
+      td {
+        padding: 0.6rem;
+
+        &:first-child {
+          font-weight: bold;
+        }
+      }
+
+      th {
+        padding: 0.5rem;
+        text-align: left;
+      }
+
+      .winner-tag {
+        padding: 5px;
+        font-size: 0.8rem;
+        color: #fff;
+        background-color: #5bc774;
+        border-radius: 5px;
+      }
+    }
+  }
+}

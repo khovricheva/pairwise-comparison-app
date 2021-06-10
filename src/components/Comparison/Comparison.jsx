@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import './Comparison.css';
+import React from 'react';
+import './Comparison.scss';
 
 function Comparison({ items, setItems }) {
   const pairs = [];
@@ -30,7 +30,7 @@ function Comparison({ items, setItems }) {
       ? items.findIndex((item) => item.itemName === elem.nextSibling.id)
       : items.findIndex((item) => item.itemName === elem.previousSibling.id);
 
-    let newArray = [...items];
+    const newArray = [...items];
 
     if (elem.nextSibling && elem.nextSibling.classList.contains('active')) {
       elem.nextSibling.classList.remove('active');
@@ -59,20 +59,21 @@ function Comparison({ items, setItems }) {
   createPairs(items);
 
   return (
-    <div>
+    <div className='comparison'>
+      <h3 className='comparison_header'>Compare items</h3>
       {pairs.map((item, i) => (
         <div className='pair' key={i}>
           <button
             id={item[0]}
             onClick={(event) => selectBest(event.target)}
-            className={`pair-btn`}
+            className='pair-btn'
           >
             {item[0]}
           </button>
           <button
             id={item[1]}
             onClick={(event) => selectBest(event.target)}
-            className={`pair-btn`}
+            className='pair-btn'
           >
             {item[1]}
           </button>
